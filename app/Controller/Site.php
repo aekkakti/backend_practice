@@ -19,7 +19,7 @@ class Site
         if ($request->method==='POST' && User::create($request->all())) {
             echo 'Пользователь успешно зарегистрирован!';
         }
-        return (new View())->render('site.signup');
+        return (new View())->render('site.profile');
     }
 
     public function login(Request $request): string
@@ -28,7 +28,7 @@ class Site
             return new View('site.login');
         }
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/');
+            app()->route->redirect('/profile');
         }
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
     }

@@ -10,7 +10,7 @@
 
 body {
     background: url("../img/background_image.jpg") no-repeat;
-    background-size: 1920px 1080px;
+    background-size: 1920px 1000px;
 }
 
 .container {
@@ -96,4 +96,37 @@ label {
 
 button:hover {
     cursor: pointer;
+}
+
+.girlPicture {
+    position: relative;
+    left: 37px;
+    top: 125px;
+    height: 700px;
+}
+
+#siteForWhat {
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    left: 1000px;
+    width: 820px;
+    bottom: 420px;
+    color: #425C5A;
+}
+
+#siteForWhatAbout {
+    position: relative;
+    font-size: 20px;
+    font-weight: 300;
+    left: 1000px;
+    bottom: 380px;
+    width: 820px;
+    color: #425C5A;
+}
+
+.goToAuthInput {
+    position: relative;
+    left: 1500px;
+    top: -340px;
 }
