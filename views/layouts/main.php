@@ -11,7 +11,7 @@
 <body>
 <header>
     <nav>
-        <a href="<?= app()->route->getUrl('/hello') ?>" class="t-d-n">Главная</a>
+        <a href="<?= app()->route->getUrl('/') ?>" class="t-d-n">Главная</a>
         <?php
         if (!app()->auth::check()):
             ?>

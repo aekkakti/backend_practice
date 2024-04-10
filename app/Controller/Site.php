@@ -28,7 +28,7 @@ class Site
             return new View('site.login');
         }
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/hello');
+            app()->route->redirect('/');
         }
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
     }
@@ -36,7 +36,7 @@ class Site
     public function logout(): void
     {
         Auth::logout();
-        app()->route->redirect('/hello');
+        app()->route->redirect('/');
     }
 
 

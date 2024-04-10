@@ -24,22 +24,23 @@ body {
 }
 
 .b-w {
-    background: white;
+    background: #EFF6FF;
 }
 
 .frame {
     width: 767px;
     height: 537px;
     border: 1px solid #1889C9;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    position: relative;
+    top: 190px;
 }
 
 .login_form {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: 45px;
 }
 
 .inputLoginForm {
@@ -55,18 +56,17 @@ input {
     border: 1px solid #1889C9;
     font-size: 20px;
     padding-left: 5px;
+    margin-top: 15px;
 }
 
 
 .authText {
     color: #36A5BD;
     font-size: 59px;
-    position: relative;
-    left: 150px;
-    bottom: 215px;
+    padding-top: 25px;
 }
 
-button {
+.submitInput {
     width: 290.06px;
     height: 65.28px;
     background: #36A5BD;
@@ -74,10 +74,24 @@ button {
     border-radius: 25px;
     color: #FFE8D2;
     font-size: 20px;
+    transition: .9s;
+    position: relative;
+    right: 25px;
+    top: 45px;
+}
+
+.submitInput:hover {
+    cursor: pointer;
+    border: 2px solid #36A5BD;
+    color: #36A5BD;
+    background: white;
+    transition: .9s;
 }
 
 label {
     font-size: 20px;
+    position: relative;
+    margin-top: 25px;
 }
 
 button:hover {
