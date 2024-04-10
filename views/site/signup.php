@@ -1,22 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign up</title>
-</head>
-<body>
-
 <h2>Регистрация нового пользователя</h2>
-<h3><?= $message ?? ''; ?></h3>
-<form method="POST">
-    <label>Имя <input type="text" name="name"></label>
-    <label>Логин <input type="text" name="login"></label>
-    <label>Пароль <input type="password" name="password"></label>
+<form method="post">
+    <label>Фамилия <input type="text" name="surname" required></label><br><br>
+    <label>Имя <input type="text" name="name" required></label><br><br>
+    <label>Отчество <input type="text" name="patronymic"></label><br><br>
+    <label>Роль <select name="role_id"><br><br>
+            <option value="1">Администратор</option>
+            <option value="2">Сотрудник деканата</option>
+        </select></label><br><br>
+    <label>Логин <input type="text" name="nickname" required></label><br><br>
+    <label>Адрес электронной почты <input type="email" name="email"></label><br><br>
+    <label>Пароль <input type="password" name="password" required></label><br><br>
     <button>Зарегистрироваться</button>
 </form>
-
-</body>
-</html>
