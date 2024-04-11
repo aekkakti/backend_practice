@@ -11,7 +11,7 @@ if (app()->auth::check()):
     <p class="FIOUser"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
     <p class="roleUser">Роль: администратор/сотрудник</p>
     <img src="../../public/img/user_icon.png" alt="Нет изображения" class="userIcon">
-    <form method="post">
+    <form method="post" class="changeInfoForm">
         <div class="changeInfoForm1">
             <p>Логин</p> <input type="text" name="nickname"><br><br>
             <p>E-mail</p> <input type="email" name="email"><br><br>
