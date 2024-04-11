@@ -453,3 +453,13 @@ input[type="file"] {
     border-radius: 15px;
     font-size: 20px;
 }
+
+.arrowDownIcon {
+    position: relative;
+    left: 760px;
+    top: 90px;
+}
+
+.arrowDownIcon:hover {
+    cursor: pointer;
+}
