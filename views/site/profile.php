@@ -1,27 +1,46 @@
-
 <?php
 if (app()->auth::check()):
 ?>
-<h2>Регистрация нового пользователя</h2>
-<form method="post">
-    <label>Фамилия <input type="text" name="surname" required></label><br><br>
-    <label>Имя <input type="text" name="name" required></label><br><br>
-    <label>Отчество <input type="text" name="patronymic"></label><br><br>
-    <select name="role_id" hidden><br><br>
-            <option value="2">Сотрудник деканата</option>
-        </select>
-    <label>Логин <input type="text" name="nickname" required></label><br><br>
-    <label>Адрес электронной почты <input type="email" name="email"></label><br><br>
-    <label>Пароль <input type="password" name="password" required></label><br><br>
-    <button>Создать пользователя</button>
-</form>
-    <a href="<?= app()->route->getUrl('/logout') ?>" class="t-d-n">Выход (<?= app()->auth::user()->nickname ?>)</a>
+<header>
+    <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
+    <a href="<?= app()->route->getUrl('/admin') ?>" class="linkNavigation">Рабочая область</a>
+    <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
+
+</header>
+<main>
+    <p class="FIOUser"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
+    <p class="roleUser">Роль: администратор/сотрудник</p>
+    <img src="../../public/img/user_icon.png" alt="Нет изображения" class="userIcon">
+    <form method="post">
+        <div class="changeInfoForm1">
+            <p>Логин</p> <input type="text" name="nickname"><br><br>
+            <p>E-mail</p> <input type="email" name="email"><br><br>
+            <p>Пароль</p> <input type="password" name="password"><br><br>
+        </div>
+        <div class="changeInfoForm2">
+            <p>Фамилия</p><input type="text" name="surname"><br><br>
+            <p>Имя</p> <input type="text" name="name"><br><br>
+            <p>Отчество</p> <input type="text" name="patronymic"><br><br>
+        </div>
+        <div class="changeInfoForm3">
+            <p>Изменить аватарку</p>
+            <label for="file-upload" class="inputAvatarButton">
+                Выберите файл
+            </label>
+            <input id="file-upload" type="file" />
+
+            <button class="saveChangesProfile">Сохранить изменения</button>
+        </div>
+
+
+    </form>
+</main>
+
 <?php
 else:
-
     ?>
     <h3>Вы не авторизованы</h3>
-    <a href="/login"><input type="submit" class="submitInput" value="Авторизация"></a>
+    <a href="<?= app()->route->getUrl('/login'); ?>"><input type="submit" class="submitInput" value="Авторизация"></a>
 
 <?php
 endif;

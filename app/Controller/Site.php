@@ -39,5 +39,10 @@ class Site
         app()->route->redirect('/');
     }
 
+    public function admin(): string
+    {
+        return new View('site.admin');
+    }
+
 
 }
