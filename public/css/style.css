@@ -245,13 +245,14 @@ p {
     justify-content: center;
     width: 185px;
     height: 33px;
-    left: 90px;
-    top: -10px;
+    top: -43px;
+    left: 136px;
     border-radius: 15px;
     border: 1px solid #1889C9;
     background-color: #1889C9;
-    font-size: 18px;
+    font-size: 20px;
     color: white;
+
 }
 
 .inputAvatarButton:hover {
@@ -260,7 +261,7 @@ p {
 
 .saveChangesProfile {
     position: relative;
-    top: 133px;
+    top: 100px;
     width: 230px;
     height: 40px;
     background: #36A5BD;
@@ -281,4 +282,19 @@ p {
 
 input[type="file"] {
     display: none;
+}
+
+.fileName {
+    display: flex;
+    position: relative;
+    border: 1px solid #1889C9;
+    border-radius: 15px;
+    color:  #425C5A75;
+    text-align: center;
+    align-items: center;
+    width: 154px;
+    height: 33px;
+    top: 15px;
+    padding-left: 10px;
+    border-right: none;
 }

@@ -24,6 +24,7 @@ if (app()->auth::check()):
         </div>
         <div class="changeInfoForm3">
             <p>Изменить аватарку</p>
+            <div class="fileName">Файл не выбран</div>
             <label for="file-upload" class="inputAvatarButton">
                 Выберите файл
             </label>
