@@ -39,9 +39,9 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function admin(): string
+    public function admin()
     {
-        return new View('site.admin');
+        return (new View())->render('site.workspaceAdmin');
     }
 
 
