@@ -40,8 +40,8 @@ if (app()->auth::check()):
 <?php
 else:
     ?>
-    <h3>Вы не авторизованы</h3>
-    <a href="<?= app()->route->getUrl('/login'); ?>"><input type="submit" class="submitInput" value="Авторизация"></a>
+    <h3 class="youNotAuthorizedText">Вы не авторизованы</h3>
+    <a href="<?= app()->route->getUrl('/login'); ?>"><input type="submit" class="submitInput goToAuth" value="Авторизация"></a>
 
 <?php
 endif;

@@ -302,3 +302,17 @@ input[type="file"] {
 .changeInfoForm {
     height: 300px;
 }
+
+.youNotAuthorizedText {
+    position: relative;
+    top: 315px;
+    left: 685px;
+    width: 700px;
+    font-size: 48px;
+}
+
+.goToAuth {
+    position: relative;
+    top: 350px;
+    left: 790px;
+}
