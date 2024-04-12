@@ -4,7 +4,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
-        <a href="<?= app()->route->getUrl('/admin') ?>" class="linkNavigation">Рабочая область</a>
+        <a href="<?= app()->route->getUrl('/workspace') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
 
     </header>
@@ -58,7 +58,40 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
 elseif (app()->auth::check()):
 
     ?>
-    <h3 class="youNotAuthorizedText">Недоступно</h3>
+
+    <header>
+        <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
+        <a href="<?= app()->route->getUrl('/workspace') ?>" class="linkNavigation">Рабочая область</a>
+        <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
+    </header>
+
+    <main class="addNewBuilding">
+        <h2 class="c-g">Добавление нового здания</h2>
+        <form class="addNewBuildingForm">
+            <p>Название</p> <input type="text" name="name" required><br>
+            <p>Адрес</p> <input type="text" name="address" required><br>
+            <button class="createBuildingButton">Создание</button>
+        </form>
+    </main>
+
+     <main class="allBuildings">
+            <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
+            <div class="building1">
+                <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="buildingLittleIcon">
+                <p class="buildingName">Название: Биокорпус</p>
+                <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
+                <button type="submit" class="moreDetails">Подробнее</button>
+                <button type="submit" class="calculationsButton">Подсчеты</button>
+            </div>
+             <div class="building2">
+                 <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="buildingLittleIcon">
+                 <p class="buildingName">Название: Биокорпус</p>
+                 <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
+                 <button type="submit" class="moreDetails">Подробнее</button>
+                 <button type="submit" class="calculationsButton">Подсчеты</button>
+             </div>
+         <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
+     </main>
 
     <?php
 

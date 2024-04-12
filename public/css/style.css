@@ -57,6 +57,7 @@ input {
     font-size: 20px;
     padding-left: 5px;
     margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .authText {
@@ -79,18 +80,15 @@ input {
     top: 45px;
 }
 
-.submitInput:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
-    transition: .9s;
-}
-
 label {
     font-size: 20px;
     position: relative;
     margin-top: 25px;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 700;
 }
 
 button:hover {
@@ -195,14 +193,6 @@ header {
     transition: .9s;
 }
 
-.saveChanges:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
-    transition: .9s;
-}
-
 .changeInfoForm1 {
     position: relative;
     width: 490px;
@@ -274,14 +264,6 @@ p {
     transition: .9s;
 }
 
-.saveChangesProfile:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
-    transition: .9s;
-}
-
 input[type="file"] {
     display: none;
 }
@@ -321,8 +303,8 @@ input[type="file"] {
 
 .addWorker {
     position: relative;
-    left: 190px;
-    top: 50px;
+    left: 150px;
+    top: 15px;
     padding-left: 10px;
     padding-top: 10px;
     width: 763px;
@@ -341,13 +323,13 @@ input[type="file"] {
 .addWorkerForm2 {
     position: relative;
     left: 243px;
-    bottom: 189px;
+    bottom: 210px;
 }
 
 .addWorkerForm3 {
     position: relative;
     left: 485px;
-    bottom: 378px;
+    bottom: 420px;
 }
 
 .createWorkerButton {
@@ -364,7 +346,7 @@ input[type="file"] {
     transition: .9s;
 }
 
-.createWorkerButton:hover {
+.createWorkerButton:hover, .createBuildingButton:hover, .submitInput:hover, .saveChangesProfile:hover, .saveChanges:hover, .calculationsButton:hover {
     cursor: pointer;
     border: 2px solid #36A5BD;
     color: #36A5BD;
@@ -375,12 +357,13 @@ input[type="file"] {
 .c-g {
     color: #232828;
     opacity: .9;
+    margin-bottom: 10px;
 }
 
 .allWorkers {
     position: relative;
     width: 1528px;
-    left: 195px;
+    left: 150px;
     top: 80px;
 }
 
@@ -452,14 +435,132 @@ input[type="file"] {
     border: none;
     border-radius: 15px;
     font-size: 20px;
+    transition: .9s;
+}
+
+.deleteWorker:hover {
+    cursor: pointer;
+    border: 2px solid #BD3646;
+    color: #BD3646;
+    background: white;
+    transition: .9s;
 }
 
 .arrowDownIcon {
     position: relative;
     left: 760px;
-    top: 90px;
+    top: 82px;
 }
 
-.arrowDownIcon:hover {
+.arrowDownIcon:hover, .arrowDownIcon2:hover {
     cursor: pointer;
+}
+
+.addNewBuilding {
+    position: relative;
+    left: 140px;
+    top: 50px;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 300px;
+    height: 233px;
+}
+
+.createBuildingButton {
+    position: relative;
+    top: 30px;
+    width: 230px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.allBuildings {
+     position: relative;
+     width: 1270px;
+     left: 450px;
+     bottom: 180px;
+ }
+
+.building1 {
+    border-radius: 5px;
+    position: relative;
+    top: 25px;
+    width: 1270px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.building2 {
+    border-radius: 5px;
+    position: relative;
+    top: 60px;
+    width: 1270px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.allBuildingsText {
+    position: relative;
+    left: 120px;
+}
+
+.buildingLittleIcon {
+    position: relative;
+    left: 120px;
+    top: 5px;
+}
+
+.buildingName {
+    position: relative;
+    left: 230px;
+    bottom: 70px;
+}
+
+.buildingAddress {
+    position: relative;
+    left: 235px;
+    bottom: 62px;
+}
+
+.moreDetails {
+    position: relative;
+    left: 700px;
+    top: -110px;
+    width: 230px;
+    height: 40px;
+    color: #36A5BD;
+    border: 1px solid #36A5BD;
+    border-radius: 25px;
+    background: white;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.calculationsButton {
+    position: relative;
+    left: 720px;
+    top: -110px;
+    width: 230px;
+    height: 40px;
+    color: #FFE8D2;
+    border: 1px solid #36A5BD;
+    border-radius: 25px;
+    background: #36A5BD;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.moreDetails:hover {
+    text-decoration: #36A5BD;
+}
+
+.arrowDownIcon2 {
+    position: relative;
+    left: 560px;
+    top: 450px;
 }
