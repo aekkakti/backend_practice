@@ -14,12 +14,16 @@ class Site
         return (new View())->render('site.hello',['message' => 'Сайт для работы с учебно-методическим управлением, перейдите в профиль для работы']);
     }
 
-    public function signup(Request $request): string
+    public function profile(Request $request): string
     {
+        return (new View())->render('site.profile');
+    }
+
+    public function signup(Request $request): string {
         if ($request->method==='POST' && User::create($request->all())) {
             echo 'Пользователь успешно зарегистрирован!';
         }
-        return (new View())->render('site.profile');
+        return (new View())->render('site.workspace');
     }
 
     public function login(Request $request): string
@@ -37,11 +41,6 @@ class Site
     {
         Auth::logout();
         app()->route->redirect('/');
-    }
-
-    public function workspace()
-    {
-        return (new View())->render('site.workspace');
     }
 
     public function room()
