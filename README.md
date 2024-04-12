@@ -15,7 +15,12 @@
     cd backend_practice
 ```
 
-3. Разверните локально при помощи XAMPP сервер:
+3. Установите composer
+ ```bash
+    composer install
+```
+
+4. Разверните при помощи XAMPP локальный сервер
 
 # Запуск
 
