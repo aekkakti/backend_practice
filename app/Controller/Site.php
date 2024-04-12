@@ -44,4 +44,9 @@ class Site
         return (new View())->render('site.workspace');
     }
 
+    public function room()
+    {
+        return (new View())->render('site.room');
+    }
+
 }

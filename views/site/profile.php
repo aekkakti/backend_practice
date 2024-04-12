@@ -8,22 +8,22 @@ if (app()->auth::check()):
 
 </header>
 <main>
-    <p class="FIOUser"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
-    <p class="roleUser">Роль: администратор/сотрудник</p>
+    <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
+    <p class="roleUser noneLeft">Роль: администратор/сотрудник</p>
     <img src="../../public/img/user_icon.png" alt="Нет изображения" class="userIcon">
     <form method="post" class="changeInfoForm">
         <div class="changeInfoForm1">
-            <p>Логин</p> <input type="text" name="nickname"><br><br>
-            <p>E-mail</p> <input type="email" name="email"><br><br>
-            <p>Пароль</p> <input type="password" name="password"><br><br>
+            <p class="noneLeft">Логин</p> <input type="text" name="nickname"><br><br>
+            <p class="noneLeft">E-mail</p> <input type="email" name="email"><br><br>
+            <p class="noneLeft">Пароль</p> <input type="password" name="password"><br><br>
         </div>
         <div class="changeInfoForm2">
-            <p>Фамилия</p><input type="text" name="surname"><br><br>
-            <p>Имя</p> <input type="text" name="name"><br><br>
-            <p>Отчество</p> <input type="text" name="patronymic"><br><br>
+            <p class="noneLeft">Фамилия</p><input type="text" name="surname"><br><br>
+            <p class="noneLeft">Имя</p> <input type="text" name="name"><br><br>
+            <p class="noneLeft">Отчество</p> <input type="text" name="patronymic"><br><br>
         </div>
         <div class="changeInfoForm3">
-            <p>Изменить аватарку</p>
+            <p class="noneLeft">Изменить аватарку</p>
             <div class="fileName">Файл не выбран</div>
             <label for="file-upload" class="inputAvatarButton">
                 Выберите файл
