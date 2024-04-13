@@ -11,19 +11,20 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     <main class="addWorker">
         <h2 class="c-g">Добавление нового сотрудника</h2>
             <form method="post" class="addWorkerForm">
+                <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <div class="addWorkerForm1">
-                    <p>Логин</p> <input type="text" name="nickname" required><br><br>
-                    <p>Пароль</p> <input type="password" name="password" required><br><br>
+                    <p>Логин</p> <input type="text" name="nickname"><br><br>
+                    <p>Пароль</p> <input type="password" name="password"><br><br>
                 </div>
                 <select name="role_id" hidden><br><br>
                     <option value="2">Сотрудник деканата</option>
                 </select>
                 <div class="addWorkerForm2">
-                    <p>E-mail</p> <input type="email" name="email" required><br><br>
-                    <p>Фамилия</p><input type="text" name="surname" required><br><br>
+                    <p>E-mail</p> <input type="email" name="email"><br><br>
+                    <p>Фамилия</p><input type="text" name="surname"><br><br>
                 </div>
                 <div class="addWorkerForm3">
-                    <p>Имя</p> <input type="text" name="name" required><br><br>
+                    <p>Имя</p> <input type="text" name="name" ><br><br>
                     <p>Отчество</p> <input type="text" name="patronymic"><br><br>
                 </div>
                 <button class="createWorkerButton">Создание</button>

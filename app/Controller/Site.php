@@ -2,11 +2,11 @@
 
 namespace Controller;
 
+use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
-
 class Site
 {
     public function hello()
@@ -19,10 +19,34 @@ class Site
         return (new View())->render('site.profile');
     }
 
-    public function signup(Request $request): string {
-        if ($request->method==='POST' && User::create($request->all())) {
-            echo 'Пользователь успешно зарегистрирован!';
+    public function workspace(Request $request): string {
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'role_id' => [],
+                'surname' => ['required'],
+                'name' => ['required'],
+                'patronymic' => [],
+                'nickname' => ['required', 'unique:users,nickname'],
+                'email' => ['required'],
+                'password' => ['required'],
+                'avatar' => []
+            ], [
+                'required' => 'Поле :field пустое',
+                'unique' => 'Поле :field должно быть уникальным',
+            ]);
+
+            var_dump($validator->errors());
+
+            if ($validator->fails()) {
+                return new View('site.workspace',
+                    ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
+            }
+
+            if (User::create($request->all())) {
+                app()->route->redirect('/profile');
+            }
         }
+
         return (new View())->render('site.workspace');
     }
 
