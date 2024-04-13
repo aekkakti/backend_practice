@@ -70,20 +70,18 @@ elseif (app()->auth::check()):
 
      <main class="allBuildings">
             <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
-            <div class="building1">
-                <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="buildingLittleIcon">
-                <p class="buildingName">Название: Биокорпус</p>
-                <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
-                <a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>
-                <button type="submit" class="calculationsButton">Подсчеты</button>
-            </div>
-             <div class="building2">
-                 <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="buildingLittleIcon">
-                 <p class="buildingName">Название: Биокорпус</p>
-                 <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
-                 <a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>
-                 <button type="submit" class="calculationsButton">Подсчеты</button>
-             </div>
+
+         <?php
+         foreach ($allBuildings as $building) {
+             echo '<div class="building">';
+             echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+             echo '<p class="buildingName">Название: ' . $building->name . '</p>';
+             echo '<p class="buildingAddress">Адрес: ' . $building->address . '</p>';
+             /* echo '<a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>'; */
+             echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
+             echo '</div> <br><br>';
+         }
+         ?>
          <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
      </main>
 

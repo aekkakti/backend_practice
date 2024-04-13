@@ -99,7 +99,9 @@ class Site
             }
         }
 
-        return (new View())->render('site.workspace');
+        $allBuildings = Building::all();
+
+        return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
     }
 
 
