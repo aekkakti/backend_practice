@@ -20,6 +20,7 @@ class Site
     }
 
     public function workspace(Request $request): string {
+
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'role_id' => [],
@@ -47,7 +48,10 @@ class Site
             }
         }
 
-        return (new View())->render('site.workspace');
+        $allWorkers = User::all();
+
+
+        return (new View())->render('site.workspace', ['allWorkers' => $allWorkers]);
     }
 
     public function login(Request $request): string
@@ -71,5 +75,6 @@ class Site
     {
         return (new View())->render('site.room');
     }
+
 
 }

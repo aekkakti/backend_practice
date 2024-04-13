@@ -33,28 +33,17 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
 
     <main class="allWorkers">
         <h2 class="c-g fs-30px">Все сотрудники деканата</h2>
-        <div class="worker1">
-            <img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">
-            <p class="userName">ФИО: Иванов Иван Иванович</p>
-            <p class="userLogin">Логин: olia</p>
-            <p class="userPassword">Пароль: olia12345</p>
-            <button type="submit" class="deleteWorker">Удалить сотрудника</button>
-        </div>
-        <div class="worker2">
-            <img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">
-            <p class="userName">ФИО: Иванов Иван Иванович</p>
-            <p class="userLogin">Логин: olia</p>
-            <p class="userPassword">Пароль: olia12345</p>
-            <button type="submit" class="deleteWorker">Удалить сотрудника</button>
-        </div>
-        <div class="worker3">
-            <img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">
-            <p class="userName">ФИО: Иванов Иван Иванович</p>
-            <p class="userLogin">Логин: olia</p>
-            <p class="userPassword">Пароль: olia12345</p>
-            <button type="submit" class="deleteWorker">Удалить сотрудника</button>
-        </div>
-        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon">
+        <?php
+        foreach ($allWorkers as $worker) {
+            echo '<div class="worker">';
+            echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+            echo '<p class="userName">ФИО: ' . $worker->surname . ' ' . $worker->name . ' ' . $worker->patronymic . '</p>';
+            echo '<p class="userLogin">Логин: ' . $worker->nickname . '</p>';
+            echo '<p class="userPassword">Пароль: ' . md5($worker->password) . '</p>';
+            echo '<button type="submit" class="deleteWorker" > Удалить сотрудника</button>';
+            echo '</div> <br><br>';
+        }
+        ?>
 
     </main>
 
