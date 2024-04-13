@@ -6,6 +6,7 @@ use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
 use Model\User;
+use Model\Building;
 use Src\Auth\Auth;
 class Site
 {
@@ -19,7 +20,7 @@ class Site
         return (new View())->render('site.profile');
     }
 
-    public function workspace(Request $request): string {
+    public function workspace_admin(Request $request): string {
 
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
@@ -74,6 +75,31 @@ class Site
     public function room()
     {
         return (new View())->render('site.room');
+    }
+
+    public function workspace_worker(Request $request):string
+    {
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'name' => ['required'],
+                'address' => ['required'],
+            ], [
+                'required' => 'Поле :field пустое',
+            ]);
+
+            var_dump($validator->errors());
+
+            if ($validator->fails()) {
+                return new View('site.workspace',
+                    ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
+            }
+
+            if (Building::create($request->all())) {
+                app()->route->redirect('/profile');
+            }
+        }
+
+        return (new View())->render('site.workspace');
     }
 
 

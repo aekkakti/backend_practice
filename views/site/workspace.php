@@ -4,7 +4,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
-        <a href="<?= app()->route->getUrl('/workspace') ?>" class="linkNavigation">Рабочая область</a>
+        <a href="<?= app()->route->getUrl('/workspace_admin') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
 
     </header>
@@ -54,15 +54,16 @@ elseif (app()->auth::check()):
 
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
-        <a href="<?= app()->route->getUrl('/workspace') ?>" class="linkNavigation">Рабочая область</a>
+        <a href="<?= app()->route->getUrl('/workspace_worker') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
     </header>
 
     <main class="addNewBuilding">
         <h2 class="c-g">Добавление нового здания</h2>
-        <form class="addNewBuildingForm">
-            <p>Название</p> <input type="text" name="name" required><br>
-            <p>Адрес</p> <input type="text" name="address" required><br>
+        <form method="POST" class="addNewBuildingForm">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+            <p>Название</p> <input type="text" name="name"><br>
+            <p>Адрес</p> <input type="text" name="address"><br>
             <button class="createBuildingButton">Создание</button>
         </form>
     </main>

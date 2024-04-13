@@ -4,7 +4,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
-        <a href="<?= app()->route->getUrl('/workspace') ?>" class="linkNavigation">Рабочая область</a>
+        <a href="<?= app()->route->getUrl('/workspace_worker') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
 
     </header>
