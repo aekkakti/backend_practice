@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 12 2024 г., 12:27
--- Версия сервера: 10.4.28-MariaDB
--- Версия PHP: 8.2.4
+-- Время создания: Апр 13 2024 г., 04:48
+-- Версия сервера: 10.4.32-MariaDB
+-- Версия PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -199,17 +199,11 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
-
---
--- Ограничения внешнего ключа таблицы `building`
---
-ALTER TABLE `building`
-  ADD CONSTRAINT `building_ibfk_1` FOREIGN KEY (`build_id`) REFERENCES `list_buildings` (`build_id`);
 
 --
 -- Ограничения внешнего ключа таблицы `list_room`
