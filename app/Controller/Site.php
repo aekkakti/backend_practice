@@ -17,7 +17,36 @@ class Site
 
     public function profile(Request $request): string
     {
-        return (new View())->render('site.profile');
+        $userId = app()->auth->user()->id;
+
+        if ($request->method === 'POST') {
+
+
+            $validator = new Validator($request->all(), [
+                'role_id' => [],
+                'surname' => ['required'],
+                'name' => ['required'],
+                'patronymic' => [],
+                'email' => ['required'],
+                'password' => ['required'],
+                'avatar' => []
+            ], [
+                'required' => 'Поле :field пустое',
+            ]);
+
+            var_dump($validator->errors());
+
+            if ($validator->fails()) {
+                return new View('site.profile', ['message' => $validator->errors()]);
+            }
+
+
+
+            $user = User::find($userId);
+            $user->update($request->all());
+        }
+
+        return new View('site.profile', ['message' => 'Данные успешно обновлены', 'userAvatar' => 'data:image/jpeg;base64,' . base64_encode(app()->auth::user()->avatar)]);
     }
 
     public function workspace_admin(Request $request): string {

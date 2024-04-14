@@ -27,6 +27,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                     <p>Имя</p> <input type="text" name="name" ><br><br>
                     <p>Отчество</p> <input type="text" name="patronymic"><br><br>
                 </div>
+                <input type="file" name="avatar" value="'../../uploads/avatar/default_avatar.png'" hidden>
                 <button class="createWorkerButton">Создание</button>
             </form>
     </main>
@@ -35,13 +36,17 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
         <h2 class="c-g fs-30px">Все сотрудники деканата</h2>
         <?php
         foreach ($allWorkers as $worker) {
-            echo '<div class="worker">';
-            echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-            echo '<p class="userName">ФИО: ' . $worker->surname . ' ' . $worker->name . ' ' . $worker->patronymic . '</p>';
-            echo '<p class="userLogin">Логин: ' . $worker->nickname . '</p>';
-            echo '<p class="userPassword">Пароль: ' . md5($worker->password) . '</p>';
-            echo '<button type="submit" class="deleteWorker" > Удалить сотрудника</button>';
-            echo '</div> <br><br>';
+            if ($worker->role_id == 2) {
+                echo '<div class="worker">';
+                echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+                echo '<div class = "workerInfo">';
+                echo '<p style="width: 600px" class="noneLeft">ФИО: ' . $worker->surname . ' ' . $worker->name . ' ' . $worker->patronymic . '</p>';
+                echo '<p style="width: 600px" class="noneLeft">Логин: ' . $worker->nickname . '</p>';
+                echo '<p style="width: 600px" class="noneLeft">Пароль: ' . $worker->password . '</p>';
+                echo '</div>';
+                echo '<button type="submit" class="deleteWorker" > Удалить сотрудника</button>';
+                echo '</div> <br><br>';
+            }
         }
         ?>
 
@@ -74,12 +79,14 @@ elseif (app()->auth::check()):
          <?php
          foreach ($allBuildings as $building) {
              echo '<div class="building">';
-             echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-             echo '<p class="buildingName">Название: ' . $building->name . '</p>';
-             echo '<p class="buildingAddress">Адрес: ' . $building->address . '</p>';
+             echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+             echo '<div class="buildingInfo">';
+                 echo '<p style="width: 600px" class="noneLeft">Название: ' . $building->name . '</p>';
+                 echo '<p style="width: 600px" class="noneLeft">Адрес: ' . $building->address . '</p>';
+             echo '</div>';
              /* echo '<a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>'; */
              echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
-             echo '</div> <br><br>';
+             echo '</div><br><br>';
          }
          ?>
          <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
