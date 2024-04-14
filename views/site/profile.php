@@ -8,7 +8,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
 
 </header>
 
-    <main style="position: relative; left: 50px; width: 1500px">
+    <main class="profileInfo">
         <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Администратор</p>
         <img src="<?= $userAvatar ?>" alt="Аватар пользователя" class="userIcon">
@@ -46,10 +46,10 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
     </header>
 
-        <main>
+        <main class="profileInfo">
             <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Сотрудник</p>
-            <img src="../../public/img/user_icon.png" alt="Нет изображения" class="userIcon">
+            <img src="<?= $userAvatar ?>" alt="Аватар пользователя" class="userIcon">
             <form method="post" class="changeInfoForm">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <div class="changeInfoForm1">
@@ -64,7 +64,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 </div>
                 <div class="changeInfoForm3">
                     <p class="noneLeft">Изменить аватарку</p>
-                    <div class="fileName"><?= app()->auth::user()->avatar ?></div>
+                    <div class="fileName"></div>
                     <label for="file-upload" class="inputAvatarButton">
                         Выберите файл
                     </label>

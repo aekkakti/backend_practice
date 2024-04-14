@@ -41,7 +41,6 @@ class Site
             }
 
 
-
             $user = User::find($userId);
             $user->update($request->all());
         }

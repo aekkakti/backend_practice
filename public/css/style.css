@@ -233,8 +233,19 @@ p {
     justify-content: center;
 }
 
+.infoText {
+    justify-content: left;
+    width: 600px;
+}
+
 .noneLeft {
     justify-content: left;
+}
+
+.profileInfo {
+    position: relative;
+    left: 50px;
+    width: 1500px;
 }
 
 .inputAvatar {

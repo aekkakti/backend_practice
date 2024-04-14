@@ -40,9 +40,9 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 echo '<div class="worker">';
                 echo '<img src="../../public/img/user_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
                 echo '<div class = "workerInfo">';
-                echo '<p style="width: 600px" class="noneLeft">ФИО: ' . $worker->surname . ' ' . $worker->name . ' ' . $worker->patronymic . '</p>';
-                echo '<p style="width: 600px" class="noneLeft">Логин: ' . $worker->nickname . '</p>';
-                echo '<p style="width: 600px" class="noneLeft">Пароль: ' . $worker->password . '</p>';
+                echo '<p class="infoText">ФИО: ' . $worker->surname . ' ' . $worker->name . ' ' . $worker->patronymic . '</p>';
+                echo '<p class="infoText">Логин: ' . $worker->nickname . '</p>';
+                echo '<p class="infoText">Пароль: ' . $worker->password . '</p>';
                 echo '</div>';
                 echo '<button type="submit" class="deleteWorker" > Удалить сотрудника</button>';
                 echo '</div> <br><br>';
@@ -81,8 +81,8 @@ elseif (app()->auth::check()):
              echo '<div class="building">';
              echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
              echo '<div class="buildingInfo">';
-                 echo '<p style="width: 600px" class="noneLeft">Название: ' . $building->name . '</p>';
-                 echo '<p style="width: 600px" class="noneLeft">Адрес: ' . $building->address . '</p>';
+                 echo '<p class="infoText">Название: ' . $building->name . '</p>';
+                 echo '<p class="infoText">Адрес: ' . $building->address . '</p>';
              echo '</div>';
              /* echo '<a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>'; */
              echo '<button type="submit" class="calculationsButton">Подсчеты</button>';

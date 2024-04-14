@@ -40,7 +40,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
             <p class="roomType">Вид: Аудитория</p>
             <p class="roomArea">Площадь: 50 кв. м.</p>
             <p class="roomNumberOfSeats">Кол-во посадочных мест: 32</p>
-            <button type="submit" class="deleteRoom">Удалить</button>
             <img src="../../public/img/schoolbag_icon.png" alt="Нет изображения" class="schoolbagIcon"></a>
             <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon3">
         </div>
