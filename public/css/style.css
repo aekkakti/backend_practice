@@ -613,8 +613,8 @@ input[type="file"] {
 
 .schoolbagIcon {
     position: relative;
-    bottom: 110px;
-    right: -75px;
+    bottom: 133px;
+    right: -100px;
 }
 
 .roomName {
@@ -679,4 +679,21 @@ input[type="file"] {
 
 .allRooms {
     height: 114px;
+}
+
+.infoRoom1, .infoRoom2 {
+    position: relative;
+    padding-top: 5px;
+    width: 600px;
+    justify-content: left;
+}
+
+.infoRoom1 {
+    top: 15px;
+    left: 250px;
+}
+
+.infoRoom2 {
+    bottom: 69px;
+    left: 620px;
 }

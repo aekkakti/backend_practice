@@ -2,6 +2,9 @@
 
 namespace Controller;
 
+use Model\ListRoom;
+use Model\Room;
+use Model\Type;
 use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
@@ -106,37 +109,82 @@ class Site
     {
         $request = new Request();
         $building = Building::find($build_id);
+        $rooms = Room::where('build_id',$build_id)->get();
+        $type = Type::all();
+
 
         if ($request->method === 'POST') {
+            if (isset($_POST['name_building'])) {
 
-            $validator = new Validator($request->all(), [
-                'name' => ['required', 'minlength'],
-                'address' => ['required'],
-            ], [
-                'required' => 'Поле :field пустое',
-                'minlength' => 'Поле :field должно содержать не менее 4 символов'
-            ]);
+                $validator = new Validator($request->all(), [
+                    'name_building' => ['required', 'minlength'],
+                    'address_building' => ['required'],
+                ], [
+                    'required' => 'Поле :field пустое',
+                    'minlength' => 'Поле :field должно содержать не менее 4 символов'
+                ]);
 
-            if (($validator->errors())) {
-                var_dump($validator->errors());
+                if (($validator->errors())) {
+                    var_dump($validator->errors());
+                }
+
+                if ($validator->fails()) {
+                    return new View('site.room', ['message' => $validator->errors()]);
+                }
+
+                $building->update($request->all());
             }
+            else {
+                $validator = new Validator($request->all(), [
+                    'name' => ['required'],
+                    'number' => ['required'],
+                    'type_id' => ['required'],
+                    'area' => ['required'],
+                    'number_of_seats' => ['required'],
+                ], [
+                    'required' => 'Поле :field пустое',
+                    'minlength' => 'Поле :field должно содержать не менее 4 символов'
+                ]);
 
-            if ($validator->fails()) {
-                return new View('site.room', ['message' => $validator->errors()]);
+                if (($validator->errors())) {
+                    var_dump($validator->errors());
+                }
+
+                if ($validator->fails()) {
+                    return new View('site.room', ['message' => $validator->errors()]);
+                }
+
+                $room = Room::create([
+                    'build_id' => $building->build_id,
+                    'name' => $request->name,
+                    'number' => $request->number,
+                    'type_id' => $request->type_id,
+                    'area' => $request->area,
+                    'number_of_seats' => $request->number_of_seats,
+                    ]);
+
+                $room_id = $room->id;
+
+                ListRoom::create([
+                    'build_id' => $building->build_id,
+                    'room_id' => $room_id
+                ]);
+
+                app()->route->redirect('/workspace_worker');
+
             }
-
-            $building->update($request->all());
-
         }
-        return (new View())->render('site.room', ['building' => $building]);
+
+
+        return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type]);
     }
 
     public function workspace_worker(Request $request):string
     {
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
-                'name' => ['required'],
-                'address' => ['required'],
+                'name_building' => ['required'],
+                'address_building' => ['required'],
             ], [
                 'required' => 'Поле :field пустое',
             ]);
@@ -149,7 +197,7 @@ class Site
             }
 
             if (Building::create($request->all())) {
-                app()->route->redirect('/profile');
+                app()->route->redirect('/workspace_worker');
             }
         }
 

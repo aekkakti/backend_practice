@@ -66,8 +66,8 @@ elseif (app()->auth::check()):
         <h2 class="c-g">Добавление нового здания</h2>
         <form method="POST" class="addNewBuildingForm">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-            <p>Название</p> <input type="text" name="name"><br>
-            <p>Адрес</p> <input type="text" name="address"><br>
+            <p>Название</p> <input type="text" name="name_building"><br>
+            <p>Адрес</p> <input type="text" name="address_building"><br>
             <button class="createBuildingButton">Создание</button>
         </form>
     </main>
@@ -77,16 +77,16 @@ elseif (app()->auth::check()):
         <?php
         foreach ($allBuildings as $building) {
             echo '<div class="building">';
-            echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-            echo '<div class="buildingInfo">';
-            echo '<p class="infoText">Название: ' . $building->name . '</p>';
-            echo '<p class="infoText">Адрес: ' . $building->address . '</p>';
-            echo '</div>';
-            echo '<form method="GET" action="' . app()->route->getUrl('/room/' . $building->build_id). '">';
-            echo '<button type="submit" class="moreDetails">Подробнее</button>';
-            echo '</form>';
-            echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
-            echo '</div><br><br>';
+                echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+                echo '<div class="buildingInfo">';
+                echo '<p class="infoText">Название: ' . $building->name_building . '</p>';
+                echo '<p class="infoText">Адрес: ' . $building->address_building . '</p>';
+                echo '</div>';
+                echo '<form method="GET" action="' . app()->route->getUrl('/room/' . $building->build_id). '">';
+                echo '<button type="submit" class="moreDetails">Подробнее</button>';
+                echo '</form>';
+                echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
+                echo '</div><br><br>';
         }
         ?>
         <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
