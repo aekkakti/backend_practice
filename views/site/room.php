@@ -25,9 +25,10 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
     </main>
 
     <main class="editBuilding">
-        <form class="editBuildingForm">
-            <p class="noneLeft">Название</p> <input type="text" name="name" placeholder="Биокорпус" required><br><br>
-            <p class="noneLeft">Адрес<br></p> <input type="text" name="address" placeholder="ул.Уличная д.1" required><br>
+        <form method="POST" class="editBuildingForm">
+            <input type="hidden" name="build_id" value="<?= $building->build_id ?> ">
+            <p class="noneLeft">Название</p> <input type="text" name="name" value="<?= $building->name ?>" required><br><br>
+            <p class="noneLeft">Адрес<br></p> <input type="text" name="address" value="<?= $building->address ?>" required><br>
             <button class="createBuildingButton">Сохранить изменеия</button>
         </form>
     </main>

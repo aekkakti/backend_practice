@@ -11,6 +11,6 @@ Route::add(['GET', 'POST'], '/profile', [Controller\Site::class, 'profile']);
 Route::add(['GET', 'POST'], '/workspace_admin', [Controller\Site::class, 'workspace_admin']);
 Route::add(['GET', 'POST'], '/workspace_worker', [Controller\Site::class, 'workspace_worker']);
 
-Route::add(['GET', 'POST'], '/room', [Controller\Site::class, 'room']);
+Route::add(['GET', 'POST'], '/room/{build_id}', [Controller\Site::class, 'room']);
 
 

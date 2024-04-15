@@ -16,6 +16,7 @@ class Building extends Model
         'address',
     ];
 
+    protected $primaryKey = 'build_id';
 
     public function findIdentity(int $build_id)
     {

@@ -21,7 +21,6 @@ class Site
 
         if ($request->method === 'POST') {
 
-
             $validator = new Validator($request->all(), [
                 'nickname' => ['required', 'minlength'],
                 'role_id' => [],
@@ -103,9 +102,32 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function room()
+    public function room(Request $request, $build_id): string
     {
-        return (new View())->render('site.room');
+        $building = Building::find($build_id);
+
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'name' => ['required', 'minlength'],
+                'address' => ['required'],
+            ], [
+                'required' => 'Поле :field пустое',
+                'minlength' => 'Поле :field должно содержать не менее 4 символов'
+            ]);
+
+            if (($validator->errors())) {
+                var_dump($validator->errors());
+            }
+
+            if ($validator->fails()) {
+                return new View('site.room', ['message' => $validator->errors()]);
+            }
+
+            $building->update($request->all());
+
+        }
+        return (new View())->render('site.room', ['building' => $building]);
     }
 
     public function workspace_worker(Request $request):string
@@ -130,16 +152,12 @@ class Site
             }
         }
 
+
         $allBuildings = Building::all();
 
         return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
     }
 
-    public function getInfoBuilding(Request $request) {
-        $building = Building::where('buildings', $build_id)->first();
-
-
-    }
 
 
 }

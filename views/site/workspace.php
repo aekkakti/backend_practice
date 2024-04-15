@@ -72,24 +72,25 @@ elseif (app()->auth::check()):
         </form>
     </main>
 
-     <main class="allBuildings">
-            <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
-
-         <?php
-         foreach ($allBuildings as $building) {
-             echo '<div class="building">';
-             echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-             echo '<div class="buildingInfo">';
-                 echo '<p class="infoText">Название: ' . $building->name . '</p>';
-                 echo '<p class="infoText">Адрес: ' . $building->address . '</p>';
-             echo '</div>';
-             /* echo '<a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>'; */
-             echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
-             echo '</div><br><br>';
-         }
-         ?>
-         <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
-     </main>
+    <main class="allBuildings">
+        <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
+        <?php
+        foreach ($allBuildings as $building) {
+            echo '<div class="building">';
+            echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
+            echo '<div class="buildingInfo">';
+            echo '<p class="infoText">Название: ' . $building->name . '</p>';
+            echo '<p class="infoText">Адрес: ' . $building->address . '</p>';
+            echo '</div>';
+            echo '<form method="GET" action="' . app()->route->getUrl('/room/' . $building->build_id). '">';
+            echo '<button type="submit" class="moreDetails">Подробнее</button>';
+            echo '</form>';
+            echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
+            echo '</div><br><br>';
+        }
+        ?>
+        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
+    </main>
 
     <?php
 
