@@ -161,7 +161,7 @@ class Site
                     'type_id' => $request->type_id,
                     'area' => $request->area,
                     'number_of_seats' => $request->number_of_seats,
-                    ]);
+                ]);
 
                 $room_id = $room->id;
 
@@ -201,12 +201,20 @@ class Site
             }
         }
 
+        if ($request->method === 'GET' && isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $building = Building::where('name_building', 'like', '%' . $search . '%')->first();
+
+            if ($building) {
+                return (new View())->render('site.workspace', ['building' => $building]);
+            }
+        }
+
 
         $allBuildings = Building::all();
 
         return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
     }
-
 
 
 }

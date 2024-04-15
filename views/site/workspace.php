@@ -32,6 +32,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
             </form>
     </main>
 
+
     <main class="allWorkers">
         <h2 class="c-g fs-30px">Все сотрудники деканата</h2>
         <?php
@@ -62,6 +63,13 @@ elseif (app()->auth::check()):
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
     </header>
 
+    <div class="searchForm">
+        <form method="GET" class="search">
+            <p><input type="text" name="search" placeholder="Поиск по названию"></p>
+            <button type="submit" class="searchButton">Найти</button>
+        </form>
+    </div>
+
     <main class="addNewBuilding">
         <h2 class="c-g">Добавление нового здания</h2>
         <form method="POST" class="addNewBuildingForm">
@@ -74,23 +82,41 @@ elseif (app()->auth::check()):
 
     <main class="allBuildings">
         <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
-        <?php
-        foreach ($allBuildings as $building) {
-            echo '<div class="building">';
-                echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-                echo '<div class="buildingInfo">';
-                echo '<p class="infoText">Название: ' . $building->name_building . '</p>';
-                echo '<p class="infoText">Адрес: ' . $building->address_building . '</p>';
-                echo '</div>';
-                echo '<form method="GET" action="' . app()->route->getUrl('/room/' . $building->build_id). '">';
-                echo '<button type="submit" class="moreDetails">Подробнее</button>';
-                echo '</form>';
-                echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
-                echo '</div><br><br>';
-        }
-        ?>
-        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
+        <?php if (isset($building)): ?>
+            <div class="building">
+                <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">
+                <div class="buildingInfo">
+                    <p class="infoText">Название: <?= $building->name_building ?></p>
+                    <p class="infoText">Адрес: <?= $building->address_building ?></p>
+                </div>
+                <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
+                    <button type="submit" class="moreDetails">Подробнее</button>
+                </form>
+                <form class="roomCountForm" method="GET" action="<?= app()->route->getUrl('/workspace_worker/' . $building->build_id) ?>">
+                    <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
+                    <button type="submit" class="calculationsButton">Подсчеты</button>
+                </form>
+            </div><br><br>
+        <?php elseif (isset($allBuildings)): ?>
+            <?php foreach ($allBuildings as $building): ?>
+                <div class="building">
+                    <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">
+                    <div class="buildingInfo">
+                        <p class="infoText">Название: <?= $building->name_building ?></p>
+                        <p class="infoText">Адрес: <?= $building->address_building ?></p>
+                    </div>
+                    <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
+                        <button type="submit" class="moreDetails">Подробнее</button>
+                    </form>
+                    <form class="roomCountForm" method="GET" action="<?= app()->route->getUrl('/workspace_worker/' . $building->build_id) ?>">
+                        <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
+                        <button type="submit" class="calculationsButton">Подсчеты</button>
+                    </form>
+                </div><br><br>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </main>
+
 
     <?php
 

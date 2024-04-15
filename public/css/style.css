@@ -62,7 +62,7 @@ input, .selectType {
     height: 34px;
     border: 1px solid #1889C9;
     font-size: 20px;
-    padding-left: 5px;
+    padding-left: 10px;
     margin-top: 15px;
     margin-bottom: 10px;
 }
@@ -370,7 +370,7 @@ input[type="file"] {
     transition: .9s;
 }
 
-.createWorkerButton:hover, .createBuildingButton:hover, .submitInput:hover, .saveChangesProfile:hover, .saveChanges:hover, .calculationsButton:hover, .createRoomButton:hover  {
+.createWorkerButton:hover, .createBuildingButton:hover, .submitInput:hover, .saveChangesProfile:hover, .saveChanges:hover, .calculationsButton:hover, .createRoomButton:hover, .searchButton:hover  {
     cursor: pointer;
     border: 2px solid #36A5BD;
     color: #36A5BD;
@@ -445,16 +445,6 @@ input[type="file"] {
     bottom: 80px;
 }
 
-.arrowDownIcon {
-    position: relative;
-    left: 760px;
-    top: 120px;
-}
-
-.arrowDownIcon:hover, .arrowDownIcon2:hover, .arrowDownIcon3:hover {
-    cursor: pointer;
-}
-
 .addNewBuilding {
     position: relative;
     left: 140px;
@@ -520,7 +510,7 @@ input[type="file"] {
 .moreDetails {
     position: relative;
     left: 700px;
-    top: -110px;
+    top: -130px;
     width: 230px;
     height: 40px;
     color: #36A5BD;
@@ -534,7 +524,7 @@ input[type="file"] {
 .calculationsButton {
     position: relative;
     left: 950px;
-    top: -150px;
+    top: -170px;
     width: 230px;
     height: 40px;
     color: #FFE8D2;
@@ -547,12 +537,6 @@ input[type="file"] {
 
 .moreDetails:hover {
     text-decoration: underline;
-}
-
-.arrowDownIcon2 {
-    position: relative;
-    left: 560px;
-    top: 400px;
 }
 
 .createRoomButton {
@@ -671,11 +655,6 @@ input[type="file"] {
     background: white;
     transition: .9s;
 }
-.arrowDownIcon3 {
-    position: relative;
-    left: 535px;
-    top: 120px;
-}
 
 .allRooms {
     height: 114px;
@@ -696,4 +675,25 @@ input[type="file"] {
 .infoRoom2 {
     bottom: 69px;
     left: 620px;
+}
+
+.searchForm {
+    position: relative;
+    left: 800px;
+    width: 900px;
+    top: 15px;
+}
+
+.searchButton {
+    position: relative;
+    left: 235px;
+    bottom: 47px;
+    width: 160px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
 }

@@ -51,7 +51,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
         echo '</div><br><br>';
     }
     ?>
-        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon3">
 
         <?php
 
