@@ -102,8 +102,9 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function room(Request $request, $build_id): string
+    public function room($build_id): string
     {
+        $request = new Request();
         $building = Building::find($build_id);
 
         if ($request->method === 'POST') {

@@ -26,6 +26,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
 
     <main class="editBuilding">
         <form method="POST" class="editBuildingForm">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <input type="hidden" name="build_id" value="<?= $building->build_id ?> ">
             <p class="noneLeft">Название</p> <input type="text" name="name" value="<?= $building->name ?>" required><br><br>
             <p class="noneLeft">Адрес<br></p> <input type="text" name="address" value="<?= $building->address ?>" required><br>
