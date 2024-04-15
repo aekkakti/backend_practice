@@ -44,7 +44,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 echo '<p class="infoText">Логин: ' . $worker->nickname . '</p>';
                 echo '<p class="infoText">Пароль: ' . $worker->password . '</p>';
                 echo '</div>';
-                echo '<button type="submit" class="deleteWorker" > Удалить сотрудника</button>';
                 echo '</div> <br><br>';
             }
         }

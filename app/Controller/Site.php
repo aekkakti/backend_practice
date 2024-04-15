@@ -23,6 +23,7 @@ class Site
 
 
             $validator = new Validator($request->all(), [
+                'nickname' => ['required', 'minlength'],
                 'role_id' => [],
                 'surname' => ['required'],
                 'name' => ['required'],
@@ -32,14 +33,16 @@ class Site
                 'avatar' => []
             ], [
                 'required' => 'Поле :field пустое',
+                'minlength' => 'Поле :field должно содержать не менее 4 символов'
             ]);
 
-            var_dump($validator->errors());
+            if (($validator->errors())) {
+                var_dump($validator->errors());
+            }
 
             if ($validator->fails()) {
                 return new View('site.profile', ['message' => $validator->errors()]);
             }
-
 
             $user = User::find($userId);
             $user->update($request->all());
@@ -130,6 +133,12 @@ class Site
         $allBuildings = Building::all();
 
         return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
+    }
+
+    public function getInfoBuilding(Request $request) {
+        $building = Building::where('buildings', $build_id)->first();
+
+
     }
 
 

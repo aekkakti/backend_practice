@@ -445,29 +445,6 @@ input[type="file"] {
     bottom: 80px;
 }
 
-.deleteWorker {
-    position: relative;
-    left: 1150px;
-    bottom: 140px;
-    width: 230px;
-    height: 40px;
-    display: block;
-    color: #FFE8D2;
-    background: #BD3646;
-    border: none;
-    border-radius: 15px;
-    font-size: 20px;
-    transition: .9s;
-}
-
-.deleteWorker:hover {
-    cursor: pointer;
-    border: 2px solid #BD3646;
-    color: #BD3646;
-    background: white;
-    transition: .9s;
-}
-
 .arrowDownIcon {
     position: relative;
     left: 760px;
