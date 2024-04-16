@@ -27,7 +27,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                     <p>Имя</p> <input type="text" name="name" ><br><br>
                     <p>Отчество</p> <input type="text" name="patronymic"><br><br>
                 </div>
-                <input type="file" name="avatar" value="'../../uploads/avatar/default_avatar.png'" hidden>
                 <button class="createWorkerButton">Создание</button>
             </form>
     </main>
@@ -72,10 +71,16 @@ elseif (app()->auth::check()):
 
     <main class="addNewBuilding">
         <h2 class="c-g">Добавление нового здания</h2>
-        <form method="POST" class="addNewBuildingForm">
+        <form method="POST" class="addNewBuildingForm" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <p>Название</p> <input type="text" name="name_building"><br>
             <p>Адрес</p> <input type="text" name="address_building"><br>
+            <p>Добавить фото</p>
+            <div class="fileName"></div>
+            <label for="file-upload" class="inputAvatarButton">
+                Выберите файл
+            </label>
+            <input type="file" name="image_path" id="file-upload" />
             <button class="createBuildingButton">Создание</button>
         </form>
     </main>

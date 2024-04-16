@@ -14,6 +14,7 @@ class Building extends Model
     protected $fillable = [
         'name_building',
         'address_building',
+        'image_path',
     ];
 
     protected $primaryKey = 'build_id';

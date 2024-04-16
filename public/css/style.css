@@ -207,7 +207,7 @@ header {
     width: 490px;
     height: 261px;
     left: 550px;
-    bottom: 140px;
+    top: 132px;
 }
 
 .changeInfoForm2 {
@@ -215,7 +215,7 @@ header {
     width: 490px;
     height: 261px;
     left: 830px;
-    bottom: 401px;
+    bottom: 132px;
 }
 
 .changeInfoForm3 {
@@ -261,14 +261,13 @@ p {
     justify-content: center;
     width: 185px;
     height: 33px;
-    top: -43px;
-    left: 136px;
+    top: -10px;
+    left: 25px;
     border-radius: 15px;
     border: 1px solid #1889C9;
     background-color: #1889C9;
     font-size: 20px;
     color: white;
-
 }
 
 .inputAvatarButton:hover {
@@ -277,7 +276,7 @@ p {
 
 .saveChangesProfile {
     position: relative;
-    top: 120px;
+    top: 503px;
     width: 230px;
     height: 40px;
     background: #36A5BD;
@@ -290,21 +289,6 @@ p {
 
 input[type="file"] {
     display: none;
-}
-
-.fileName {
-    display: flex;
-    position: relative;
-    border: 1px solid #1889C9;
-    border-radius: 15px;
-    color:  #425C5A75;
-    text-align: center;
-    align-items: center;
-    width: 154px;
-    height: 33px;
-    top: 15px;
-    padding-left: 10px;
-    border-right: none;
 }
 
 .changeInfoForm {

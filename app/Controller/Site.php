@@ -24,12 +24,6 @@ class Site
 
         if ($request->method === 'POST') {
 
-            $image_path = $_FILES['image_path']['name'];
-            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/backend_practice/uploads/avatars";
-            $target_file = $target_dir . basename($image_path);
-
-            move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file);
-
             $validator = new Validator($request->all(), [
                 'nickname' => ['required', 'minlength'],
                 'role_id' => [],
@@ -38,7 +32,6 @@ class Site
                 'patronymic' => [],
                 'email' => ['required'],
                 'password' => ['required'],
-                'image_path' => []
             ], [
                 'required' => 'Поле :field пустое',
                 'minlength' => 'Поле :field должно содержать не менее 4 символов'
@@ -53,20 +46,10 @@ class Site
             }
 
             $user = User::find($userId);
-            $user->update([
-                'nickname' => $_POST['nickname'],
-                'surname' => $_POST['surname'],
-                'name' => $_POST['name'],
-                'patronymic' => $_POST['patronymic'],
-                'email' => $_POST['email'],
-                'password' => $_POST['password'],
-                'image_path' => $_FILES['image_path']['name']
-            ]);
-
-            var_dump($_FILES['image_path']['name']);
+            $user->update($request->all());
         }
 
-        return new View('site.profile', ['message' => 'Данные успешно обновлены', 'userAvatar' => 'data:image/jpeg;base64,' . base64_encode(app()->auth::user()->avatar)]);
+        return new View('site.profile', ['message' => 'Данные успешно обновлены']);
     }
 
     public function workspace_admin(Request $request): string {
@@ -80,7 +63,6 @@ class Site
                 'nickname' => ['required', 'unique:users,nickname'],
                 'email' => ['required'],
                 'password' => ['required'],
-                'avatar' => []
             ], [
                 'required' => 'Поле :field пустое',
                 'unique' => 'Поле :field должно быть уникальным',
@@ -94,7 +76,7 @@ class Site
             }
 
             if (User::create($request->all())) {
-                app()->route->redirect('/profile');
+                app()->route->redirect('/workspace_admin');
             }
         }
 
@@ -197,6 +179,7 @@ class Site
             $validator = new Validator($request->all(), [
                 'name_building' => ['required'],
                 'address_building' => ['required'],
+                'image_path' => []
             ], [
                 'required' => 'Поле :field пустое',
             ]);
@@ -208,9 +191,21 @@ class Site
                     ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
             }
 
-            if (Building::create($request->all())) {
-                app()->route->redirect('/workspace_worker');
-            }
+            $image_path = $_FILES['image_path']['name'];
+            $target_dir = __DIR__ . '/../../uploads/avatars/';
+            $target_file = $target_dir . basename($image_path);
+            $fileName = $_FILES['image_path']['name'];
+
+            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)){
+
+                if (Building::create([
+                    'name_building' => $request->all()['name_building'],
+                    'address_building' => $request->all()['address_building'],
+                    'image_path' => $fileName
+                ])) {
+                    app()->route->redirect('/workspace_worker');
+                }};
+
         }
 
         if ($request->method === 'GET' && isset($_GET['search'])) {

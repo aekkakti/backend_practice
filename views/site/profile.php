@@ -11,18 +11,10 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     <main class="profileInfo">
         <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Администратор</p>
-        <?php
-            $user = \Model\User::find(app()->auth::user()->id);
-            $image_path = $user->image_path;
-
-            var_dump("/backend_practice/uploads/avatars/$image_path");
-
-            echo "<img src='/backend_practice/uploads/avatars/$image_path' alt='Аватарка отсутствует'>";
-        ?>
         <form method="post" class="changeInfoForm" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <div class="changeInfoForm1">
-                <p class="noneLeft">Логин</p> <input value="<?= app()->auth::user()->nickname ?>" disabled><br><br>
+                <p class="noneLeft">Логин</p> <input type="text" name="nickname" value="<?= app()->auth::user()->nickname ?>"><br><br>
                 <p class="noneLeft">E-mail</p> <input type="email" name="email" value="<?= app()->auth::user()->email ?>"><br><br>
                 <p class="noneLeft">Пароль</p> <input type="password" name="password" value="<?= app()->auth::user()->password ?>"><br><br>
             </div>
@@ -32,13 +24,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 <p class="noneLeft">Отчество</p> <input type="text" name="patronymic" value="<?= app()->auth::user()->patronymic ?>"><br><br>
             </div>
             <div class="changeInfoForm3">
-                <p class="noneLeft">Изменить аватарку</p>
-                <div class="fileName"></div>
-                <label for="file-upload" class="inputAvatarButton">
-                    Выберите файл
-                </label>
-                <input type="file" name="avatar" id="file-upload"  />
-
                 <button class="saveChangesProfile">Сохранить изменения</button>
             </div>
         </form>
@@ -56,14 +41,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
         <main class="profileInfo">
             <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Сотрудник</p>
-            <?php
-                $user = \Model\User::find(app()->auth::user()->id);
-                $image_path = $user->image_path;
-
-                var_dump("/backend_practice/uploads/avatars/$image_path");
-
-                echo "<img src='/backend_practice/uploads/avatars/$image_path' alt='Аватарка отсутствует'>";
-            ?>
             <form method="post" class="changeInfoForm">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <div class="changeInfoForm1">
@@ -77,12 +54,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                     <p class="noneLeft">Отчество</p> <input type="text" name="patronymic" value="<?= app()->auth::user()->patronymic ?>"><br><br>
                 </div>
                 <div class="changeInfoForm3">
-                    <p class="noneLeft">Изменить аватарку</p>
-                    <div class="fileName"></div>
-                    <label for="file-upload" class="inputAvatarButton">
-                        Выберите файл
-                    </label>
-                    <input id="file-upload" type="file" />
 
                     <button class="saveChangesProfile">Сохранить изменения</button>
                 </div>
