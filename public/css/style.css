@@ -697,3 +697,12 @@ input[type="file"] {
     font-size: 18px;
     transition: .9s;
 }
+
+.areaAndSeatsText {
+    position: relative;
+    left: 500px;
+    bottom: 400px;
+    width: 700px;
+    justify-content: left;
+}
+

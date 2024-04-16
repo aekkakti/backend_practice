@@ -24,6 +24,12 @@ class Site
 
         if ($request->method === 'POST') {
 
+            $image_path = $_FILES['image_path']['name'];
+            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/backend_practice/uploads/avatars";
+            $target_file = $target_dir . basename($image_path);
+
+            move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file);
+
             $validator = new Validator($request->all(), [
                 'nickname' => ['required', 'minlength'],
                 'role_id' => [],
@@ -32,7 +38,7 @@ class Site
                 'patronymic' => [],
                 'email' => ['required'],
                 'password' => ['required'],
-                'avatar' => []
+                'image_path' => []
             ], [
                 'required' => 'Поле :field пустое',
                 'minlength' => 'Поле :field должно содержать не менее 4 символов'
@@ -47,7 +53,17 @@ class Site
             }
 
             $user = User::find($userId);
-            $user->update($request->all());
+            $user->update([
+                'nickname' => $_POST['nickname'],
+                'surname' => $_POST['surname'],
+                'name' => $_POST['name'],
+                'patronymic' => $_POST['patronymic'],
+                'email' => $_POST['email'],
+                'password' => $_POST['password'],
+                'image_path' => $_FILES['image_path']['name']
+            ]);
+
+            var_dump($_FILES['image_path']['name']);
         }
 
         return new View('site.profile', ['message' => 'Данные успешно обновлены', 'userAvatar' => 'data:image/jpeg;base64,' . base64_encode(app()->auth::user()->avatar)]);
@@ -105,17 +121,14 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function room($build_id): string
-    {
+    public function room($build_id): string {
         $request = new Request();
         $building = Building::find($build_id);
-        $rooms = Room::where('build_id',$build_id)->get();
+        $rooms = Room::where('build_id', $build_id)->get();
         $type = Type::all();
-
 
         if ($request->method === 'POST') {
             if (isset($_POST['name_building'])) {
-
                 $validator = new Validator($request->all(), [
                     'name_building' => ['required', 'minlength'],
                     'address_building' => ['required'],
@@ -123,10 +136,6 @@ class Site
                     'required' => 'Поле :field пустое',
                     'minlength' => 'Поле :field должно содержать не менее 4 символов'
                 ]);
-
-                if (($validator->errors())) {
-                    var_dump($validator->errors());
-                }
 
                 if ($validator->fails()) {
                     return new View('site.room', ['message' => $validator->errors()]);
@@ -145,10 +154,6 @@ class Site
                     'required' => 'Поле :field пустое',
                     'minlength' => 'Поле :field должно содержать не менее 4 символов'
                 ]);
-
-                if (($validator->errors())) {
-                    var_dump($validator->errors());
-                }
 
                 if ($validator->fails()) {
                     return new View('site.room', ['message' => $validator->errors()]);
@@ -171,10 +176,17 @@ class Site
                 ]);
 
                 app()->route->redirect('/workspace_worker');
-
             }
         }
 
+        if (isset($_GET['countAreaAndSeats'])) {
+
+            $countAreaAndSeats = $_GET['countAreaAndSeats'];
+            $sumArea = Room::where('build_id', $countAreaAndSeats)->sum('area');
+            $sumSeats = Room::where('build_id', $countAreaAndSeats)->sum('number_of_seats');
+
+            return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type, 'sumArea' => $sumArea, 'sumSeats' => $sumSeats]);
+        }
 
         return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type]);
     }

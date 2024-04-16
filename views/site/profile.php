@@ -11,7 +11,14 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     <main class="profileInfo">
         <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Администратор</p>
-        <img src="<?= $userAvatar ?>" alt="Аватар пользователя" class="userIcon">
+        <?php
+            $user = \Model\User::find(app()->auth::user()->id);
+            $image_path = $user->image_path;
+
+            var_dump("/backend_practice/uploads/avatars/$image_path");
+
+            echo "<img src='/backend_practice/uploads/avatars/$image_path' alt='Аватарка отсутствует'>";
+        ?>
         <form method="post" class="changeInfoForm" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <div class="changeInfoForm1">
@@ -49,7 +56,14 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
         <main class="profileInfo">
             <p class="FIOUser noneLeft"><?= app()->auth::user()->surname ?> <?= app()->auth::user()->name ?> <?= app()->auth::user()->patronymic ?></p>
             <p class="roleUser noneLeft">Роль: Сотрудник</p>
-            <img src="<?= $userAvatar ?>" alt="Аватар пользователя" class="userIcon">
+            <?php
+                $user = \Model\User::find(app()->auth::user()->id);
+                $image_path = $user->image_path;
+
+                var_dump("/backend_practice/uploads/avatars/$image_path");
+
+                echo "<img src='/backend_practice/uploads/avatars/$image_path' alt='Аватарка отсутствует'>";
+            ?>
             <form method="post" class="changeInfoForm">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <div class="changeInfoForm1">

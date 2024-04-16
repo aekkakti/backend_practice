@@ -91,10 +91,7 @@ elseif (app()->auth::check()):
                 </div>
                 <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
                     <button type="submit" class="moreDetails">Подробнее</button>
-                </form>
-                <form class="roomCountForm" method="GET" action="<?= app()->route->getUrl('/workspace_worker/' . $building->build_id) ?>">
                     <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
-                    <button type="submit" class="calculationsButton">Подсчеты</button>
                 </form>
             </div><br><br>
         <?php elseif (isset($allBuildings)): ?>
@@ -107,10 +104,7 @@ elseif (app()->auth::check()):
                     </div>
                     <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
                         <button type="submit" class="moreDetails">Подробнее</button>
-                    </form>
-                    <form class="roomCountForm" method="GET" action="<?= app()->route->getUrl('/workspace_worker/' . $building->build_id) ?>">
                         <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
-                        <button type="submit" class="calculationsButton">Подсчеты</button>
                     </form>
                 </div><br><br>
             <?php endforeach; ?>
