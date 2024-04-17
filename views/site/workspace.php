@@ -1,7 +1,6 @@
 
 <?php
-$auth = new \Collect\Collect();
-if ($auth->isLogged() && app()->auth->user()->role_id == 1):
+if (app()->auth::check() && app()->auth->user()->role_id == 1):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
@@ -53,7 +52,7 @@ if ($auth->isLogged() && app()->auth->user()->role_id == 1):
     </main>
 
 <?php
-elseif (!$auth->isLogged()):
+elseif (app()->auth::check()):
 
     ?>
 
