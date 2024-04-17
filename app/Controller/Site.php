@@ -180,7 +180,7 @@ class Site
     {
 
         $auth = new \Collect\Collect();
-        if (!$auth->isLogged()) {
+        if ($auth->isLogged()) {
             app()->route->redirect('/login');
         }
 

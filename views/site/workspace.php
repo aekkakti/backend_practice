@@ -53,7 +53,7 @@ if ($auth->isLogged() && app()->auth->user()->role_id == 1):
     </main>
 
 <?php
-elseif ($auth->isLogged()):
+elseif (!$auth->isLogged()):
 
     ?>
 
