@@ -1,5 +1,6 @@
 <?php
-if (!app()->auth::check()):
+$auth = new \Collect\Collect();
+if (!$auth->isLogged()):
     ?>
 <div class="container">
     <div class="frame b-w">

@@ -11,6 +11,8 @@ use Src\Request;
 use Model\User;
 use Model\Building;
 use Src\Auth\Auth;
+use function Collect\userCollection;
+
 class Site
 {
     public function hello()
@@ -88,10 +90,11 @@ class Site
 
     public function login(Request $request): string
     {
+        $auth = new \Collect\Collect();
         if ($request->method === 'GET') {
             return new View('site.login');
         }
-        if (Auth::attempt($request->all())) {
+        if ((Auth::attempt($request->all())) || ($auth->isLogged())) {
             app()->route->redirect('/profile');
         }
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -175,6 +178,12 @@ class Site
 
     public function workspace_worker(Request $request):string
     {
+
+        $auth = new \Collect\Collect();
+        if (!$auth->isLogged()) {
+            app()->route->redirect('/login');
+        }
+
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'name_building' => ['required'],

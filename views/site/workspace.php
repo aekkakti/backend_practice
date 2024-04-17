@@ -1,6 +1,7 @@
 
 <?php
-if (app()->auth::check() && app()->auth->user()->role_id == 1):
+$auth = new \Collect\Collect();
+if ($auth->isLogged() && app()->auth->user()->role_id == 1):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
@@ -52,7 +53,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     </main>
 
 <?php
-elseif (app()->auth::check()):
+elseif ($auth->isLogged()):
 
     ?>
 
@@ -119,12 +120,5 @@ elseif (app()->auth::check()):
 
     <?php
 
-else:
-
-    ?>
-    <h3 class="youNotAuthorizedText">Вы не авторизованы</h3>
-    <a href="/login"><input type="submit" class="submitInput" value="Авторизация"></a>
-
-<?php
 endif;
 ?>
