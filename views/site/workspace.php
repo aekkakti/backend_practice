@@ -1,5 +1,8 @@
 
 <?php
+
+use Collect\Collect;
+
 if (app()->auth::check() && app()->auth->user()->role_id == 1):
     ?>
     <header>

@@ -1,11 +1,13 @@
 <?php
-if (app()->auth::check() && app()->auth->user()->role_id == 1):
+
+use Collect\Collect;
+
+if (app()->auth->user()->role_id == 1):
 ?>
 <header>
     <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
     <a href="<?= app()->route->getUrl('/workspace_admin') ?>" class="linkNavigation">Рабочая область</a>
     <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
-
 </header>
 
     <main class="profileInfo">
@@ -14,8 +16,8 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
         <form method="post" class="changeInfoForm" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <div class="changeInfoForm1">
-                <p class="noneLeft">Логин</p> <input type="text" name="nickname" value="<?= app()->auth::user()->nickname ?>"><br><br>
-                <p class="noneLeft">E-mail</p> <input type="email" name="email" value="<?= app()->auth::user()->email ?>"><br><br>
+                <p class="noneLeft">Логин</p> <input type="text" name="nickname" value="<?= (new Collect())->getNickname(); ?>"><br><br>
+                <p class="noneLeft">E-mail</p> <input type="email" name="email" value="<?= (new Collect())->getEmail(); ?>"><br><br>
                 <p class="noneLeft">Пароль</p> <input type="password" name="password" value="<?= app()->auth::user()->password ?>"><br><br>
             </div>
             <div class="changeInfoForm2">
@@ -30,7 +32,7 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
     </main>
 
 <?php
-    elseif (app()->auth::check() && app()->auth->user()->role_id == 2):
+    elseif (app()->auth->user()->role_id == 2):
 ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
@@ -44,8 +46,8 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
             <form method="post" class="changeInfoForm">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <div class="changeInfoForm1">
-                    <p class="noneLeft">Логин</p> <input type="text" name="nickname" value="<?= app()->auth::user()->nickname ?>"><br><br>
-                    <p class="noneLeft">E-mail</p> <input type="email" name="email" value="<?= app()->auth::user()->email ?>"><br><br>
+                    <p class="noneLeft">Логин</p> <input type="text" name="nickname" value="<?= (new Collect())->getNickname(); ?>"><br><br>
+                    <p class="noneLeft">E-mail</p> <input type="email" name="email" value="<?= (new Collect())->getEmail(); ?>"><br><br>
                     <p class="noneLeft">Пароль</p> <input type="password" name="password" value="<?= app()->auth::user()->password ?>"><br><br>
                 </div>
                 <div class="changeInfoForm2">
@@ -59,12 +61,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 </div>
             </form>
         </main>
-
-<?php
-else:
-    ?>
-    <h3 class="youNotAuthorizedText">Вы не авторизованы</h3>
-    <a href="<?= app()->route->getUrl('/login'); ?>"><input type="submit" class="submitInput goToAuth" value="Авторизация"></a>
 
 <?php
 endif;

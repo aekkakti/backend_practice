@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Collect\Collect;
 use Model\ListRoom;
 use Model\Room;
 use Model\Type;
@@ -11,7 +12,6 @@ use Src\Request;
 use Model\User;
 use Model\Building;
 use Src\Auth\Auth;
-use function Collect\userCollection;
 
 class Site
 {
@@ -22,6 +22,10 @@ class Site
 
     public function profile(Request $request): string
     {
+        $auth = new \Collect\Collect();
+        if (!$auth->isLogged()) {
+            app()->route->redirect('/login');
+        }
         $userId = app()->auth->user()->id;
 
         if ($request->method === 'POST') {
@@ -91,10 +95,14 @@ class Site
     public function login(Request $request): string
     {
         $auth = new \Collect\Collect();
+        if ($auth->isLogged()) {
+            app()->route->redirect('/profile');
+        }
+
         if ($request->method === 'GET') {
             return new View('site.login');
         }
-        if ((Auth::attempt($request->all())) || ($auth->isLogged())) {
+        if (Auth::attempt($request->all())) {
             app()->route->redirect('/profile');
         }
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -178,11 +186,6 @@ class Site
 
     public function workspace_worker(Request $request):string
     {
-
-        $auth = new \Collect\Collect();
-        if ($auth->isLogged()) {
-            app()->route->redirect('/login');
-        }
 
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
