@@ -190,10 +190,11 @@ class Site
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'name_building' => ['required'],
-                'address_building' => ['required'],
-                'image_path' => []
+                'address_building' => ['required', 'unique:buildings, address_building'],
+                'image_path' => ['required']
             ], [
                 'required' => 'Поле :field пустое',
+                'unique' => 'Поле :field должно быть уникальным'
             ]);
 
             var_dump($validator->errors());

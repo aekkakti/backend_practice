@@ -2,6 +2,7 @@
 
 use Model\User;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SiteTest extends TestCase
 {
@@ -36,15 +37,15 @@ class SiteTest extends TestCase
     public static function additionProvider(): array
     {
         return [
-            ['GET', ['nickname' => '', 'password' => '', 'email' => '', 'surname' => '', 'name' => '', 'patronymic' => ''],
+            ['GET', ['role_id' => '', 'surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
                 '<h3></h3>'
             ],
-            ['POST', ['nickname' => '', 'password' => '', 'email' => '', 'surname' => '', 'name' => '', 'patronymic' => ''],
-                '<h3>{"nickname":["Поле nickname пусто"],"password":["Поле password пусто"],"email":["Поле email пусто"], 
-                "surname":["Поле surname пусто"], "name":["Поле name пусто"], "patronymic":["Поле patronymic пусто"]}</h3>',
+            ['POST', ['role_id' => '', 'surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
+                '<h3>{"surname":["Поле surname пусто"],"name":["Поле name пусто"],"patronymic":["Поле patronymic пусто"], 
+                "nickname":["Поле nickname пусто"], "email":["Поле email пусто"], "password":["Поле password пусто"]}</h3>',
             ],
-            ['POST', ['nickname' => 'admin', 'password' => 'admin2', 'email' => 'admin2@gmail.com',
-                'surname' => 'Иванов', 'name' => 'Иван', 'patronymic' => 'Иванович'],
+            ['POST', ['role_id' => '1', 'surname' => 'Иванов', 'name' => 'Иван', 'patronymic' => 'Иванович',
+                'nickname' => 'admin', 'email' => 'admin2@gmail.com', 'password' => 'admin2'],
                 '<h3>{"nickname":["Поле nickname должно быть уникально"]}</h3>',
             ],
         ];
@@ -53,9 +54,9 @@ class SiteTest extends TestCase
     protected function setUp(): void
     {
 
-        $_SERVER['DOCUMENT_ROOT'] = '/C:/xampp/htdocs/backend_practice';
+        $_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/backend_practice';
 
-   
+
        $GLOBALS['app'] = new Src\Application(new Src\Settings([
            'app' => include $_SERVER['DOCUMENT_ROOT'] . '/../backend_practice/config/app.php',
            'db' => include $_SERVER['DOCUMENT_ROOT'] . '/../backend_practice/config/db.php',
