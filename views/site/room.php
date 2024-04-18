@@ -1,8 +1,4 @@
-
-<?php
-if (app()->auth::check() && app()->auth->user()->role_id == 2):
-    ?>
-    <header>
+ <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
         <a href="<?= app()->route->getUrl('/workspace_worker') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
@@ -60,15 +56,3 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
         echo '</div><br><br>';
     }
     ?>
-
-        <?php
-
-else:
-
-    ?>
-    <h3 class="youNotAuthorizedText">Вы не авторизованы</h3>
-    <a href="/login"><input type="submit" class="submitInput" value="Авторизация"></a>
-
-<?php
-endif;
-?>

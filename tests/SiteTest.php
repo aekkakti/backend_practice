@@ -31,25 +31,31 @@ class SiteTest extends TestCase
         $this->assertTrue((bool)User::where('nickname', $userData['nickname'])->count());
         User::where('nickname', $userData['nickname'])->delete();
 
+        $this->assertContains($message, xdebug_get_headers());
     }
 
 
     public static function additionProvider(): array
     {
         return [
-            ['GET', ['role_id' => '', 'surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
+            ['GET', ['surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
                 '<h3></h3>'
             ],
-            ['POST', ['role_id' => '', 'surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
+            ['POST', ['surname' => '', 'name' => '', 'patronymic' => '', 'nickname' => '', 'email' => '', 'password' => ''],
                 '<h3>{"surname":["Поле surname пусто"],"name":["Поле name пусто"],"patronymic":["Поле patronymic пусто"], 
                 "nickname":["Поле nickname пусто"], "email":["Поле email пусто"], "password":["Поле password пусто"]}</h3>',
             ],
-            ['POST', ['role_id' => '1', 'surname' => 'Иванов', 'name' => 'Иван', 'patronymic' => 'Иванович',
-                'nickname' => 'admin', 'email' => 'admin2@gmail.com', 'password' => 'admin2'],
+            ['POST', ['role_id' => '2', 'surname' => 'Иванов', 'name' => 'Иван', 'patronymic' => 'Иванович',
+                'nickname' => 'admin2', 'email' => 'admin2@gmail.com', 'password' => 'admin2'],
                 '<h3>{"nickname":["Поле nickname должно быть уникально"]}</h3>',
+            ],
+            ['POST', ['role_id' => '2', 'surname' => 'Иванов', 'name' => 'Иван', 'patronymic' => 'Иванович',
+                'nickname' => md5(time()), 'email' => 'admin3@gmail.com', 'password' => 'admin2'],
+                'Location: /backend_practice/views/site/workspace',
             ],
         ];
     }
+
 
     protected function setUp(): void
     {
@@ -58,9 +64,9 @@ class SiteTest extends TestCase
 
 
        $GLOBALS['app'] = new Src\Application(new Src\Settings([
-           'app' => include $_SERVER['DOCUMENT_ROOT'] . '/../backend_practice/config/app.php',
-           'db' => include $_SERVER['DOCUMENT_ROOT'] . '/../backend_practice/config/db.php',
-           'path' => include $_SERVER['DOCUMENT_ROOT'] . '/../backend_practice/config/path.php',
+           'app' => include $_SERVER['DOCUMENT_ROOT'] . '/config/app.php',
+           'db' => include $_SERVER['DOCUMENT_ROOT'] . '/config/db.php',
+           'path' => include $_SERVER['DOCUMENT_ROOT'] . '/config/path.php',
        ]));
 
        if (!function_exists('app')) {

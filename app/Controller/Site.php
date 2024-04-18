@@ -43,12 +43,9 @@ class Site
                 'minlength' => 'Поле :field должно содержать не менее 4 символов'
             ]);
 
-            if (($validator->errors())) {
-                var_dump($validator->errors());
-            }
-
             if ($validator->fails()) {
-                return new View('site.profile', ['message' => $validator->errors()]);
+                return new View('site.profile',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
 
             $user = User::find($userId);
@@ -57,6 +54,8 @@ class Site
 
         return new View('site.profile', ['message' => 'Данные успешно обновлены']);
     }
+
+
 
     public function workspace_admin(Request $request): string {
 
@@ -74,11 +73,9 @@ class Site
                 'unique' => 'Поле :field должно быть уникальным',
             ]);
 
-            var_dump($validator->errors());
-
             if ($validator->fails()) {
-                return new View('site.workspace',
-                    ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
+                return new View('site.workspace_admin',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
 
             if (User::create($request->all())) {
@@ -89,7 +86,59 @@ class Site
         $allWorkers = User::all();
 
 
-        return (new View())->render('site.workspace', ['allWorkers' => $allWorkers]);
+        return (new View())->render('site.workspace_admin', ['allWorkers' => $allWorkers]);
+    }
+
+    public function workspace_worker(Request $request):string
+    {
+
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'name_building' => ['required'],
+                'address_building' => ['required', 'unique:buildings,address_building'],
+                'image_path' => ['required']
+            ], [
+                'required' => 'Поле :field пустое',
+                'unique' => 'Поле :field должно быть уникальным'
+            ]);
+
+            var_dump($validator->errors());
+
+            if ($validator->fails()) {
+                return new View('site.workspace_worker',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            $image_path = $_FILES['image_path']['name'];
+            $target_dir = __DIR__ . '/../../uploads/avatars/';
+            $target_file = $target_dir . basename($image_path);
+            $fileName = $_FILES['image_path']['name'];
+
+            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)){
+
+                if (Building::create([
+                    'name_building' => $request->all()['name_building'],
+                    'address_building' => $request->all()['address_building'],
+                    'image_path' => $fileName
+                ])) {
+                    app()->route->redirect('/workspace_worker');
+                }};
+
+        }
+
+        if ($request->method === 'GET' && isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $building = Building::where('name_building', 'like', '%' . $search . '%')->first();
+
+            if ($building) {
+                return (new View())->render('site.workspace_worker', ['building' => $building]);
+            }
+        }
+
+
+        $allBuildings = Building::all();
+
+        return (new View())->render('site.workspace_worker',['allBuildings' => $allBuildings]);
     }
 
     public function login(Request $request): string
@@ -123,15 +172,15 @@ class Site
         if ($request->method === 'POST') {
             if (isset($_POST['name_building'])) {
                 $validator = new Validator($request->all(), [
-                    'name_building' => ['required', 'minlength'],
+                    'name_building' => ['required'],
                     'address_building' => ['required'],
                 ], [
                     'required' => 'Поле :field пустое',
-                    'minlength' => 'Поле :field должно содержать не менее 4 символов'
                 ]);
 
                 if ($validator->fails()) {
-                    return new View('site.room', ['message' => $validator->errors()]);
+                    return new View('site.room',
+                        ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
                 }
 
                 $building->update($request->all());
@@ -149,7 +198,8 @@ class Site
                 ]);
 
                 if ($validator->fails()) {
-                    return new View('site.room', ['message' => $validator->errors()]);
+                    return new View('site.room',
+                        ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
                 }
 
                 $room = Room::create([
@@ -184,57 +234,6 @@ class Site
         return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type]);
     }
 
-    public function workspace_worker(Request $request):string
-    {
-
-        if ($request->method === 'POST') {
-            $validator = new Validator($request->all(), [
-                'name_building' => ['required'],
-                'address_building' => ['required', 'unique:buildings, address_building'],
-                'image_path' => ['required']
-            ], [
-                'required' => 'Поле :field пустое',
-                'unique' => 'Поле :field должно быть уникальным'
-            ]);
-
-            var_dump($validator->errors());
-
-            if ($validator->fails()) {
-                return new View('site.workspace',
-                    ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
-            }
-
-            $image_path = $_FILES['image_path']['name'];
-            $target_dir = __DIR__ . '/../../uploads/avatars/';
-            $target_file = $target_dir . basename($image_path);
-            $fileName = $_FILES['image_path']['name'];
-
-            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)){
-
-                if (Building::create([
-                    'name_building' => $request->all()['name_building'],
-                    'address_building' => $request->all()['address_building'],
-                    'image_path' => $fileName
-                ])) {
-                    app()->route->redirect('/workspace_worker');
-                }};
-
-        }
-
-        if ($request->method === 'GET' && isset($_GET['search'])) {
-            $search = $_GET['search'];
-            $building = Building::where('name_building', 'like', '%' . $search . '%')->first();
-
-            if ($building) {
-                return (new View())->render('site.workspace', ['building' => $building]);
-            }
-        }
-
-
-        $allBuildings = Building::all();
-
-        return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
-    }
 
 
 }

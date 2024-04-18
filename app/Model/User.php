@@ -12,10 +12,10 @@ class User extends Model implements IdentityInterface
 
     public $timestamps = false;
     protected $fillable = [
+        'role_id',
         'surname',
         'name',
         'patronymic',
-        'role_id',
         'nickname',
         'email',
         'password',

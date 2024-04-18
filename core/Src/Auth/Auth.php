@@ -45,6 +45,18 @@ class Auth
         return false;
     }
 
+    public static function checkAdmin(): bool
+    {
+        if (self::user()->role_id === 1)  return true;
+        else return false;
+    }
+
+    public static function checkWorker(): bool
+    {
+        if (self::user()->role_id === 2)  return true;
+        else return false;
+    }
+
     public static function logout(): bool
     {
         Session::clear('id');
