@@ -17,4 +17,11 @@ return [
         'trim' => \Middlewares\TrimMiddleware::class,
         'specialChars' => \Middlewares\SpecialCharsMiddleware::class,
     ],
+    'providers' => [
+        'kernel' => \Providers\KernelProvider::class,
+        'route' => \Providers\RouteProvider::class,
+        'db' => \Providers\DBProvider::class,
+        'auth' => \Providers\AuthProvider::class,
+    ],
+
 ];
