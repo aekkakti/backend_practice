@@ -16,16 +16,17 @@ class RouteProvider extends AbstractProvider
     {
         $this->app->bind('route', Route::single()->setPrefix($this->app->settings->getRootPath()));
 
-        if ($this->checkPrefix('/api')) {
+        if ($this->checkPrefix('/api') || $this->checkPrefix('/api/login-api')) {
             $this->app->settings->removeAppMiddleware('csrf');
             $this->app->settings->removeAppMiddleware('specialChars');
+            $this->app->settings->removeAppMiddleware('token');
 
             Route::group('/api', function () {
                 require_once __DIR__ . '/../..' . $this->app->settings->getRoutePath() . '/api.php';
             });
             return;
         }
-
+        $this->app->settings->removeAppMiddleware('json');
         require_once __DIR__ . '/../..' . $this->app->settings->getRoutePath() . '/web.php';
 
     }

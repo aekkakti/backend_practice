@@ -19,6 +19,7 @@ class User extends Model implements IdentityInterface
         'nickname',
         'email',
         'password',
+        'csrf_token',
     ];
 
     protected static function booted()

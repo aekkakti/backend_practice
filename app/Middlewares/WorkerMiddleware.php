@@ -9,6 +9,8 @@ class WorkerMiddleware
 {
     public function handle(Request $request): void
     {
-        if (!Auth::checkWorker()) app()->route->redirect('/profile');
+        if (!Auth::checkWorker()) {
+            app()->route->redirect('/profile');
+        }
     }
 }

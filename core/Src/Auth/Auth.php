@@ -31,6 +31,14 @@ class Auth
         return false;
     }
 
+    public static function checkToken(): bool
+    {
+        if (self::user()->api_token) {
+            return true;
+        }
+        else return false;
+    }
+
     public static function user()
     {
         $id = Session::get('id') ?? 0;
@@ -69,6 +77,5 @@ class Auth
         Session::set('csrf_token', $token);
         return $token;
     }
-
 }
 
