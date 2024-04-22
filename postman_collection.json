@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "667cc098-198c-4dc2-a211-77a3d4c616cc",
+		"name": "backend practice Postman collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Авторизация",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nickname",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/login_api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"login_api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавление работника",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "66234a222db03",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "surname",
+							"value": "Testov",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Test",
+							"type": "text"
+						},
+						{
+							"key": "patronymic",
+							"value": "Testovich",
+							"type": "text"
+						},
+						{
+							"key": "nickname",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "role_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/add_worker",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"add_worker"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
